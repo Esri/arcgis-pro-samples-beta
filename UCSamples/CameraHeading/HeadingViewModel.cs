@@ -19,6 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ArcGIS.Desktop.Internal.Mapping;
 using ArcGIS.Desktop.Framework;
+using ArcGIS.Desktop.Framework.Events;
 
 namespace UCSamples.CameraHeading
 {
@@ -28,22 +29,46 @@ namespace UCSamples.CameraHeading
     class HeadingViewModel : CustomControl
     {
         private double _headingValue;
+        private bool _enableCamera = false;
 
         public HeadingViewModel()
         {
 
             MapView activeMapView = ForTheUcModule.ActiveMapView;
             if ((activeMapView != null))
+            {
                 _headingValue = activeMapView.Camera.Heading;
+                _enableCamera = true;
+            }
             else
-                 _headingValue = 0;
+            {
+                _headingValue = 0;
+                _enableCamera = false;
+            }
 
             ViewerExtentChanged.Subscribe(CameraChanged);
+            ActivePaneChangedEvent.Subscribe(OnActivePaneChanged);
+        }
+
+        private void OnActivePaneChanged(PaneEventArgs obj)
+        {
+            Pane pane = obj.IncomingPane;
+            if (pane != null)
+            {
+                IMapPane mapPane = pane as IMapPane;
+                if (mapPane != null)
+                    IsCameraEnabled = true;
+                else    
+                    IsCameraEnabled = false;
+            }
+            else
+                IsCameraEnabled = false;
         }
 
         ~HeadingViewModel()
         {
             ViewerExtentChanged.Unsubscribe(CameraChanged);
+            ActivePaneChangedEvent.Unsubscribe(OnActivePaneChanged);
         }
 
         public double CurrentHeadingValue
@@ -65,6 +90,18 @@ namespace UCSamples.CameraHeading
                 activeMapView.Camera = camera;
 
                 _headingValue = value;
+            }
+        }
+
+        public bool IsCameraEnabled 
+        {
+            get
+            {
+                return _enableCamera;
+            }
+            set
+            {
+                SetProperty(ref _enableCamera, value, () => IsCameraEnabled);
             }
         }
 
