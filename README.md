@@ -1,5 +1,5 @@
-# arcgis-pro-samples-beta4
-The arcgis-pro-samples-beta4 repository contains a set of simple samples that show you how to accomplish different mapping and GIS tasks with ArcGIS Pro Add-ins. 
+# arcgis-pro-samples-beta5
+The arcgis-pro-samples-beta5 repository contains a set of simple samples that show you how to accomplish different mapping and GIS tasks with ArcGIS Pro Add-ins. 
 
 
 ## Features
@@ -20,20 +20,20 @@ The solution in this repo creates add-ins that extend ArcGIS Pro with the follow
 
 
 ## Instructions
-* Download the contents of the [arcgis-pro-samples-beta4](https://github.com/Esri/arcgis-pro-samples-beta4) repository.
+* Download the contents of the [arcgis-pro-samples-beta5](https://github.com/Esri/arcgis-pro-samples-beta5) repository.
 * Check if your computer has the requirements to run the samples. Refer to the [Requirements](./README.md#requirements) section for the pre-requisites needed.
-* Open the solution in Visual Studio. If the ArcGIS Pro assembly references are broken, please refer to [this link](https://github.com/Esri/arcgis-pro-samples-beta4/wiki/How-to-fix-the-broken-references-in-my-ArcGIS-Pro-Add-in-solution%3F) on how to fix them.
+* Open the solution in Visual Studio. If the ArcGIS Pro assembly references are broken, please refer to [this link](https://github.com/Esri/arcgis-pro-samples-beta5/wiki/How-to-fix-the-broken-references-in-my-ArcGIS-Pro-Add-in-solution%3F) on how to fix them.
 * Compile the code and click Start to open ArcGIS Pro. The add-ins from the samples solution will load. 
 
 ## Requirements
-* ArcGIS Pro Beta 4
+* ArcGIS Pro Beta 5
 * Microsoft Visual Studio 2013 (C#) Professional, Premium, Ultimate Edition, Update 1 or Visual Studio 2013 Express for Windows Desktop.
 
 ## Optional
-* ArcGIS Pro SDK for the Microsoft .NET Framework Beta 4
+* ArcGIS Pro SDK for the Microsoft .NET Framework Beta 5
 
 ## Issues
-* The code in this repo is provided "as-is". This code is meant to work with ArcGIS Pro Beta 4 (Build 1141) only.
+* The code in this repo is provided "as-is". This code is meant to work with ArcGIS Pro Beta 5 (Build 1368) only.
 
 ## Contributing
 

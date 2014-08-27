@@ -10,8 +10,9 @@
         <cameraHeading:ValueAngleConverter x:Key="valueAngleConverter"/>
         <cameraHeading:ValueTextConverter x:Key="valueTextConverter"/>
     </UserControl.Resources>
-    <Grid>
-        <Slider Name="CameraHeadingControl" Value="{Binding Path=CurrentHeadingValue, UpdateSourceTrigger=Explicit}" Minimum="0" Maximum="360">
+
+    <Grid >
+        <Slider Name="CameraHeadingControl" Value="{Binding Path=CurrentHeadingValue, UpdateSourceTrigger=Explicit}" Minimum="0" Maximum="360" IsEnabled="{Binding IsCameraEnabled}" >            
             <Slider.Template>
                 <ControlTemplate>
                     <Viewbox>
@@ -48,8 +49,14 @@
                             </Canvas>
                         </Canvas>
                     </Viewbox>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Slider.Template>
         </Slider>
     </Grid>
+
 </UserControl>
