@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="ProSDKSamples.DockPaneDemo.DockpaneView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"                          
+             xmlns:ExtensionsControls="clr-namespace:ArcGIS.Desktop.Extensions.Controls;assembly=ArcGIS.Desktop.Extensions"   
+             xmlns:local="clr-namespace:ProSDKSamples.DockPaneDemo"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:BoolToVisibleConverter x:Key="BoolToVisibilityConverter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <DataTemplate x:Key="BookmarkListItem" DataType="{x:Type local:BookmarkItem}">
+                <StackPanel Orientation="Vertical" local:ControlViewBehavior.LeftClick="{Binding ZoomToCmd}" Background="Transparent">
+                    <Image Source="{Binding Image}"
+                                   Width="96" Height="96" Stretch="Fill" Margin="5"
+                                   DockPanel.Dock="Left" ToolTip="{Binding Name}">
+                        <Image.Effect>
+                            <DropShadowEffect Color="#FF565454" Opacity="0.4" />
+                        </Image.Effect>
+                    </Image>
+                    <TextBlock Text="{Binding Name}" />
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <DockPanel Grid.Row="0" LastChildFill="true" KeyboardNavigation.TabNavigation="Local" Height="30">
+            <ExtensionsControls:BurgerButton DockPanel.Dock="Right"
+                ToolTip="{Binding BurgerButtonTooltip}"
+                PopupMenu="{Binding BurgerButtonMenu}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Heading}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    FontSize="14">
+                <TextBlock.ToolTip>
+                    <WrapPanel Orientation="Vertical" MaxWidth="300">
+                        <TextBlock Text="{Binding Heading}" TextWrapping="Wrap"/>
+                    </WrapPanel>
+                </TextBlock.ToolTip>
+      </TextBlock>
+        </DockPanel>
+        <!--Palette Support - This dockpanel highlights a palette type implementation dock panel.  It contains a palette of all the bookmarks in the project, displaying the 
+        thumbnail and name. Click the thumbnail to zoom to it -->
+        <DockPanel LastChildFill="True" Grid.Row="1" Visibility="{Binding IsPaletteSupport, Converter={StaticResource BoolToVisibilityConverter}}">
+            <ListBox DockPanel.Dock="Left" ItemTemplate="{StaticResource BookmarkListItem}" 
+                ItemsSource="{Binding Cities}"                      
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                Margin="10">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Padding" Value="20" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </DockPanel>
+
+        <!--Basic Support - This dockpanel highlights a basic implementation of the dockpanel.  Displays the name and Map view for a list of bookmarks
+in a simple grid-->
+        <DockPanel Grid.Row="1" Visibility="{Binding IsBasicSupport, Converter={StaticResource BoolToVisibilityConverter}}">
+            <ListView x:Name="lstView" ItemsSource="{Binding Cities}" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150" Header="Bookmark" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Width="150" Header="Map" DisplayMemberBinding="{Binding MapName}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+
+    </Grid>
+</UserControl>
+
