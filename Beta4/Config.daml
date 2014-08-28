@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArcGIS defaultAssembly="UCSamples.dll" defaultNamespace="UCSamples" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS%20Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{f9ad6e8b-7505-4218-aabc-2389e1a9c3cd}" version="1.0" desktopVersion="1.0.1078">
+    <Name>UCSamples</Name>
+    <Description>UCSamples description</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author></Author>
+    <Company>Acme</Company>
+    <Date>7/7/2014 1:53:48 PM, 2014</Date>
+  </AddInInfo>
+  <dependencies>
+    <!--<dependency name="ADCore.daml" />-->
+    <dependency name="ADMapping.daml" />
+    <dependency name="Editing.daml" />
+  </dependencies>
+  
+    <categories>
+
+      <insertCategory id="UCSampleExampleCategory"/>
+      
+      <updateCategory refID="esri_editing_EditTools_POLYGON">
+        <insertComponent id="UCSamples_CutTool">
+          <content guid="d5c81e74-56d2-4a2f-ac8e-f7926c02d5da" group="esri_editing_EditTools_POLYGON_Tools" />
+        </insertComponent>
+      </updateCategory>
+
+      <!--Add the project container here-->
+      <updateCategory refID="esri_core_projectContainers">
+
+        <!--NOTE : content type attribute must match type referenced in ProjectIntegration.cs in SampleProjectContainer constructor-->
+        <insertComponent id="_ProjectContainerProjectItem_SampleContainer" className="UCSamples.ProjectItemProjectContainer.SampleProjectContainer">
+          <content type="SampleProjectItems" displayName="Sample Items" />
+        </insertComponent>
+      </updateCategory>
+      
+      <!--Add the project item here-->
+      <updateCategory refID="esri_itemInfoType">
+        <!--NOTE : type id attribute must match typeID referenced in ProjectIntegration.cs in SampleProjectItem constructor-->
+        <insertComponent id="_ProjectContainerProjectItem_SampleProjectItem" className="UCSamples.ProjectItemProjectContainer.SampleProjectItem">
+          <content viewModelClassName="UCSamples.ProjectItemProjectContainer.SampleProjectItemViewModel,UCSamples">
+            <supportedTypeIDs>
+              <type id="sampleItem" />
+            </supportedTypeIDs>
+          </content>
+        </insertComponent>
+      </updateCategory>
+    </categories>
+
+  <conditions>
+    <!-- our custom condition -->
+    <insertCondition id="example_state_condition" caption="Example state">
+      <!-- our condition is set true or false based on this underlying state -->
+      <state id="example_state" />
+    </insertCondition>
+  </conditions>
+  
+  <!-- uncomment to add a key accelerator/short cut for the control -->
+  <accelerators>
+    <!--<insertAccelerator refID="Your_Control_Id_Here" flags="Ctrl" key="F1" />-->
+  </accelerators>
+  <modules>
+    <insertModule id="UCSamples_Module1_id" className="ForTheUcModule" autoLoad="false" caption="Module1">
+      <!-- uncomment to have the control hosted on a separate tab-->
+      <tabs>
+        <!--<tab id="Module1_Tab1_Id" caption="New Tab">
+          <group refID="$groupid$"/>
+        </tab>-->
+      </tabs>
+      <tabGroups></tabGroups>
+      <toolbars></toolbars>
+      <groups>
+
+        <group id="UCSamples_FixedZoom_id" caption="Fixed Zoom" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="UCSamples_FixedZoomIn" size="large" />
+          <button refID="UCSamples_FixedZoomOut" size="large" />
+        </group>
+
+        <group id="UCSamples_CameraGroup" caption="Heading" appearsOnAddInTab="true">
+          <customControl refID="UCSamples_HeadingControl" size="large" />
+        </group>
+        
+        <group id="UCSamples_HollywoodZoomGroup" caption="Spiral Zoom" appearsOnAddInTab="true">
+          <button refID="UCSamples_HollywoodZoomIn" size="large" />
+          <button refID="UCSamples_HollywoodZoomOut" size="large" />
+        </group>
+
+        <group id="UCSamples_Geocode_id" caption="Geocode" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="UCSamples_GeocodeButton" size="large" />
+        </group>
+
+        <group id="UCSamples_GP_id" caption="Execute GP" appearsOnAddInTab="true">
+          <button refID="UCSamples_ExecuteGP" size="large" />
+          <button refID="UCSamples_CancelExecuteGP" size="large" />
+        </group>
+
+        <group id="UCSamples_SubscribeEvents_Group1" caption="Subscribe Events" appearsOnAddInTab="true">
+          <checkBox refID="UCSamples_SelectionChangedCheckbox" size="small"/>
+        </group>
+        
+        <group id="UCSamples_DockPane_id" caption="Sample Dockpane" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="UCSamples_ButtonZoomToButton" size="large" />
+          <button refID="UCSamples_ButtonPanToButton" size="large" />
+          <button refID="UCSamples_DockpaneButton" size="large" />
+        </group>
+
+        <group id="UCSamples_FrameworkState_Group1" caption="State and Conditions" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="UCSamples_ToggleAppStateBtn" size="large" />
+          <button refID="UCSamples_RespondToAppStateBtn" size="large" />
+        </group>
+
+        <!--<group id="UCSamples_ComponentCat_Group1" caption="Categories" appearsOnAddInTab="true">
+        <button refID="UCSamples_CustomComponentCategory" size="large" />
+      </group>-->
+
+        <group id="UCSamples_LayersPane_Group1" caption="Layers Pane" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="UCSamples_LayersPaneButton" size="large" />
+        </group>
+
+        <group id="UCSamples_PublishEvent_Group" caption="Publish Event" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="UCSamples_PublishEventButton" size="large" />
+        </group>
+
+        <group id="ProjectItemProjectContainer_Group1" caption="Project Items" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="UCSamples_OpenMap" size="large" />
+          <button refID="UCSamples_CloseMap" size="large" />
+          <button refID="UCSamples_AddContainerItem" size="large" />
+        </group>
+      </groups>
+      
+      
+      <controls>
+        <button id="UCSamples_OpenMap" caption="Open Map" className="UCSamples.ProjectItemProjectContainer.OpenMap" loadOnClick="true" smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png">
+          <tooltip heading="Tooltip Heading">
+            Tooltip text<disabledText />
+          </tooltip>
+        </button>
+        <button id="UCSamples_CloseMap" caption="Delete Map" className="UCSamples.ProjectItemProjectContainer.DeleteMap" loadOnClick="true" smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png">
+          <tooltip heading="Tooltip Heading">
+            Tooltip text<disabledText />
+          </tooltip>
+        </button>
+
+        <button id="UCSamples_AddContainerItem" className="UCSamples_Module1_id:AddContainerItem"
+                caption="Add Project Item" smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png">
+          <tooltip heading="Add Project Item">
+            Tooltip<disabledText></disabledText>
+          </tooltip>
+        </button>
+        
+        <!-- add your controls here -->
+        <button id="UCSamples_FixedZoomIn" caption="FixedZoomIn " className="UCSamples.FixedZoom.FixedZoomIn" loadOnClick="true" smallImage="Images\ZoomFixedZoomIn16.png" largeImage="Images\ZoomFixedZoomIn32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Tooltip Heading">Fixed Zoom In<disabledText /></tooltip>
+        </button>
+        <button id="UCSamples_FixedZoomOut" caption="FixedZoomOut " className="UCSamples.FixedZoom.FixedZoomOut" loadOnClick="true" smallImage="Images\ZoomFixedZoomOut_B_16.png" largeImage="Images\ZoomFixedZoomOut_B_32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        </button>
+
+        <customControl id="UCSamples_HeadingControl" caption="Camera Heading" className="UCSamples.CameraHeading.HeadingViewModel" loadOnClick="false" smallImage="Images\GenericButtonBlue16.png">
+          <content className="UCSamples.CameraHeading.HeadingControl" />
+        </customControl>
+        
+        <button id="UCSamples_HollywoodZoomIn" caption="Hollywood Zoom-In" className="UCSamples.HollywoodZoom.HollywoodZoomIn" loadOnClick="true" smallImage="Images\ZoomInTool_B_16.png" largeImage="Images\ZoomInTool_B_32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Hollywood Zoom-In">
+            The spiral towards earth ☺<disabledText />
+          </tooltip>
+        </button>
+        <button id="UCSamples_HollywoodZoomOut" caption="Hollywood Zoom-Out " className="UCSamples.HollywoodZoom.HollywoodZoomOut" loadOnClick="true" smallImage="Images\ZoomOutTool_B_16.png" largeImage="Images\ZoomOutTool_B_32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Hollywood Zoom-Out">
+            The spiral away from earth ☺<disabledText />
+          </tooltip>
+        </button>
+        
+        <!-- Geocode Button -->
+        <button id="UCSamples_GeocodeButton" caption="Geocode Sample" className="UCSamples.Geocode.GeocodeButton" loadOnClick="true" smallImage="Images\GeocodeAddresses16.png" largeImage="Images\GeocodeAddresses32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Geocoding Sample">
+            Geocoding sample to show async services integration.<disabledText>Have a map pane active in order to use the tool.</disabledText>
+          </tooltip>
+        </button>
+
+        <button id="contextMenu_LayerViewerButton" caption="Layer Viewer" className="UCSamples.InsertIntoContextMenu.LayerViewerButton" loadOnClick="true"
+                smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png" condition="esri_mapping_singleLayerSelectedCondition">
+          <tooltip heading="View Layer Definition">
+            <disabledText />
+          </tooltip>
+        </button>
+        
+        <button id="UCSamples_ExecuteGP" caption="ExecuteGP " className="UCSamples.GP.ExecuteGP" loadOnClick="true" smallImage="Images\GenericButtonGreen16.png" largeImage="Images\GenericButtonGreen32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Execute GP">Execute GP<disabledText /></tooltip>
+        </button>
+        <button id="UCSamples_CancelExecuteGP" caption="Cancel ExecuteGP " className="UCSamples.GP.CancelExecuteGP" loadOnClick="true" smallImage="Images\GenericButtonRed16.png" largeImage="Images\GenericButtonRed32.png" condition="esri_mapping_mapPane" disableIfBusy="false">
+          <tooltip heading="Cancel GP">Cancel GP<disabledText /></tooltip>
+        </button>
+        
+        <tool id="UCSamples_CutTool" caption="Example Cut Tool" className="UCSamples.EditingCutFeatures.CutFeaturesTool" loadOnClick="true" 
+              smallImage="Images\EditingSplitPolygonTool16.png" largeImage="Images\EditingSplitPolygonTool32.png" categoryRefID="esri_editing_CommandList">
+          <tooltip heading="Cut">
+            Cut features selected with the cut line.<disabledText />
+          </tooltip>
+          <content L_group="Cut" gallery2d="true" placeAfter="esri_editing_PlanarizeLineFeatures" />
+        </tool>
+
+        <button id="UCSamples_ButtonZoomToButton" caption="Zoom" className="UCSamples.DockPaneDemo.ButtonZoomToButton" loadOnClick="true" 
+                smallImage="Images\ZoomGeneric16.png" largeImage="Images\ZoomGeneric_B_32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Zoom to">
+            Zoom to every item in the Bookmarks<disabledText />
+          </tooltip>
+        </button>
+        <button id="UCSamples_ButtonPanToButton" caption="Pan" className="UCSamples.DockPaneDemo.ButtonPanToButton" loadOnClick="true" 
+                smallImage="Images\PanTool16.png" largeImage="Images\PanTool32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Pan To">
+            Pan to every item in the Bookmarks<disabledText />
+          </tooltip>
+        </button>
+
+        <checkBox id="UCSamples_SelectionChangedCheckbox" caption="Trap Selection Changed" className="UCSamples.SubscribeEvents.TrapSelectionChangedCheckbox" loadOnClick="false">
+          <tooltip heading="Trap Selection Changed">
+            <disabledText></disabledText>
+          </tooltip>
+        </checkBox>
+        
+        <button id="UCSamples_DockpaneButton" caption="Bookmarks pane" className="UCSamples.DockPaneDemo.DockpaneButton" loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png">
+          <tooltip heading="Display Bookmarks">
+            Display all the bookmarks in the project.<disabledText />
+          </tooltip>
+        </button>
+        <button id="UCSamples_DockPaneBurgerButton1" caption="Gallery view" className="UCSamples.DockPaneDemo.DockpaneBurgerButton_button1" loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png">
+          <tooltip heading="Gallery view">
+            Gallery view<disabledText />
+          </tooltip>
+        </button>
+        <button id="UCSamples_DockPaneBurgerButton2" caption="List View" className="UCSamples.DockPaneDemo.DockpaneBurgerButton_button2" 
+                loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png">
+          <tooltip heading="List View">
+            List View<disabledText />
+          </tooltip>
+        </button>
+
+        <button id="UCSamples_ToggleAppStateBtn" caption="Toggle State" className="UCSamples.FrameworkState.ToggleStateButton" loadOnClick="true"
+                smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png">
+          <tooltip heading="Toggle custom Add-in state">
+            <disabledText />
+          </tooltip>
+        </button>
+        
+        <button id="UCSamples_RespondToAppStateBtn" caption="Respond To State" className="UCSamples.FrameworkState.RespondToStateButton" loadOnClick="true"
+                smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png" condition="example_state_condition">
+          <tooltip heading="Respond To State Button">
+            Listens for the condition named <b>example_state_condition</b><disabledText>
+              The <b>example_state_condition</b> is False
+            </disabledText>
+          </tooltip>
+        </button>
+
+        <!--<button id="UCSamples_CustomComponentCategory" caption="Use Category" className="UCSamples.CustomComponentCategory.ComponentCategoryButton" loadOnClick="true"
+                smallImage="Images\GenericButtonGreen16.png" largeImage="Images\GenericButtonGreen32.png">
+          <tooltip heading="Component Category">
+            Shows use of custom component category<disabledText>
+            </disabledText>
+          </tooltip>
+        </button>-->
+
+        <button id="UCSamples_LayersPaneButton" caption="Show Pane" className="UCSamples.LayersPane.LayersPaneShowButton" loadOnClick="true" smallImage="Images\GenericButtonRed16.png" largeImage="Images\GenericButtonRed32.png"
+                condition="esri_mapping_mapPane">
+          <tooltip heading="Display Layers Pane">
+            Display Layers Pane<disabledText />
+          </tooltip>
+        </button>
+
+        <button id="UCSamples_PublishEventButton" caption="Publish Event" className="UCSamples.SubscribeEvents.PublishEventButton" loadOnClick="true"
+                smallImage="Images\GenericButtonBlack16.png"
+                largeImage="Images\GenericButtonBlack32.png" >
+          <tooltip heading="Example Button">Publishes a custom event</tooltip>
+        </button>
+        
+      </controls>
+      <galleries></galleries>
+      <menus>
+        <menu id="DockpaneBurgerButton_Menu" caption="Options" contextMenu="true">
+          <button refID="UCSamples_DockPaneBurgerButton1" />
+          <button refID="UCSamples_DockPaneBurgerButton2" />
+        </menu>
+
+        <!--Context menu for Project Container-->
+        <menu id="SampleProjectContainerContextMenu" caption="Sample Container">
+          <!-- TODO : Add additional menu items here as necessary-->
+        </menu>
+
+        <!--Context emnu for Project Item-->
+        <menu id="SampleProjectItemContextMenu" caption="Sample Item">
+          <!-- TODO : Add additional menu items here as necessary-->
+        </menu>
+      </menus>
+      <splitButtons></splitButtons>
+      <palettes></palettes>
+
+      <panes>
+        <pane id="UCSamples_LayersPane" caption="Layers Pane " className="UCSamples.LayersPane.LayersPaneViewModel" smallImage="Images\GenericButtonGreen16.png" isClosable="true" defaultTab="esri_mapping_homeTab" defaultTool="esri_mapping_navigateTool">
+          <content className="UCSamples.LayersPane.LayersPaneView" />
+        </pane>
+      </panes>
+      
+      <dockPanes>
+        <dockPane id="UCSamples_Dockpane_id" caption="Bookmarks " className="UCSamples.DockPaneDemo.DockpaneViewModel" keytip="DockPane" initiallyVisible="true" dock="group" dockWith="esri_core_contentsDockPane">
+          <content className="UCSamples.DockPaneDemo.DockpaneView" />
+        </dockPane>
+      </dockPanes>
+    </insertModule>
+
+    <updateModule refID="esri_mapping">
+      <menus>
+        <updateMenu refID="esri_mapping_layerContextMenu">
+          <insertButton refID="contextMenu_LayerViewerButton" separator="true" placeWith="esri_mapping_selectedLayerPropertiesButton" />
+        </updateMenu>
+
+      </menus>
+    </updateModule>
+  </modules>
+</ArcGIS>
