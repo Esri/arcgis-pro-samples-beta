@@ -1,0 +1,164 @@
+{
+  "CIMDocumentInfo" : {
+    "type" : "CIMDocumentInfo",
+    "documentTitle" : "\\\\qalab_server\\vsdata\\v110\\SDK\\Aprx\\Samples_DefaultMap\\Samples_DefaultMap.aprx",
+    "activeMapRepositoryPath" : "CIMPATH=world/world.xml",
+    "antialiasing" : "esriBGLAntialiasingNone",
+    "textAntialiasing" : "esriBGLTextAAliasForce"
+  },
+  "mapDefinition" : {
+    "type" : "CIMMap",
+    "name" : "World",
+    "uRI" : "CIMPATH=world/world.xml",
+    "layers" : [
+      "CIMPATH=world/topographic.xml"
+    ],
+    "viewingMode" : "2D",
+    "mapType" : "Map",
+    "bookmarks" : [
+      {
+        "type" : "CIMBookmark",
+        "name" : "Los Angeles",
+        "thumbnailImagePath" : "CIMPATH=Thumbnails/246328c79c95e219d21584f4b02b6eb5.dat",
+        "camera" : {
+          "type" : "CIMViewCamera",
+          "heading" : -0,
+          "pitch" : -90,
+          "roll" : 0,
+          "scale" : 499999.99999999994,
+          "x" : -13157071.652761793,
+          "y" : 4021657.8748843311,
+          "z" : 131127.85715375154
+        },
+        "location" : {
+          "xmin" : -13201918.617455723,
+          "ymin" : 3970196.3136278754,
+          "xmax" : -13112224.688067863,
+          "ymax" : 4073119.4361407869
+        }
+      },
+      {
+        "type" : "CIMBookmark",
+        "name" : "London",
+        "thumbnailImagePath" : "CIMPATH=Thumbnails/4319147b995f9acaea2de9a6a66ecee8.dat",
+        "camera" : {
+          "type" : "CIMViewCamera",
+          "heading" : -0,
+          "pitch" : -90,
+          "roll" : 0,
+          "scale" : 499999.99999999994,
+          "x" : -14188.499021553711,
+          "y" : 6711715.85937298,
+          "z" : 131127.85715375154
+        },
+        "location" : {
+          "xmin" : -59035.463715483107,
+          "ymin" : 6660254.2981165238,
+          "xmax" : 30658.465672375685,
+          "ymax" : 6763177.4206294362
+        }
+      },
+      {
+        "type" : "CIMBookmark",
+        "name" : "Paris",
+        "thumbnailImagePath" : "CIMPATH=Thumbnails/09807bb3f90e00c0f7f0b89f840cb3f5.dat",
+        "camera" : {
+          "type" : "CIMViewCamera",
+          "heading" : -0,
+          "pitch" : -90,
+          "roll" : 0,
+          "scale" : 499999.99999999994,
+          "x" : 260493.57223217803,
+          "y" : 6249960.6901078867,
+          "z" : 131127.85715375154
+        },
+        "location" : {
+          "xmin" : 215646.60753824865,
+          "ymin" : 6198499.1288514305,
+          "xmax" : 305340.53692610742,
+          "ymax" : 6301422.2513643429
+        }
+      }
+    ],
+    "clipToFullExtent" : false,
+    "defaultExtent" : {
+      "xmin" : -13580977.876779145,
+      "ymin" : 3895303.96339382,
+      "xmax" : -12801741.441226244,
+      "ymax" : 4163881.1440642127
+    },
+    "elevationSurfaces" : [
+      {
+        "type" : "CIMMapElevationSurface",
+        "elevationMode" : "BaseGlobeSurface",
+        "name" : "Ground",
+        "verticalExaggeration" : 1,
+        "mapElevationID" : "{D33CE1A9-BEF9-48A5-83AD-438DCB19EC20}"
+      }
+    ],
+    "generalPlacementProperties" : {
+      "type" : "CIMMaplexGeneralPlacementProperties",
+      "invertedLabelTolerance" : 2,
+      "unplacedLabelColor" : [
+        255,
+        0,
+        0,
+        255
+      ],
+      "placementQuality" : "Low"
+    },
+    "snappingProperties" : {
+      "type" : "CIMSnappingProperties",
+      "xYTolerance" : 10,
+      "xYToleranceUnit" : "SnapXYToleranceUnitPixel",
+      "snapRequestType" : "SnapRequestType_GeometricAndVisualSnapping"
+    },
+    "spatialReference" : {
+      "wkid" : 102100,
+      "latestWkid" : 3857
+    }
+  },
+  "layerDefinitions" : [
+    {
+      "type" : "CIMTiledServiceLayer",
+      "name" : "Topographic",
+      "uRI" : "CIMPATH=world/topographic.xml",
+      "description" : "Topographic",
+      "layerElevation" : {
+        "type" : "CIMLayerElevationSurface",
+        "mapElevationID" : "{D33CE1A9-BEF9-48A5-83AD-438DCB19EC20}"
+      },
+      "layerType" : "BasemapBackground",
+      "showLegends" : true,
+      "visibility" : true,
+      "displayCacheType" : "Permanent",
+      "serviceConnection" : {
+        "type" : "CIMAGSServiceConnection",
+        "description" : "BaseMap",
+        "objectName" : "World_Topo_Map",
+        "objectType" : "MapServer",
+        "url" : "http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/World_Topo_Map/MapServer",
+        "serverConnection" : {
+          "type" : "CIMInternetServerConnection",
+          "anonymous" : true,
+          "hideUserProperty" : true,
+          "url" : "http://services.arcgisonline.com/ArcGIS/services"
+        }
+      },
+      "transparentColor" : [
+        0,
+        0,
+        0,
+        255
+      ],
+      "backgroundColor" : [
+        0,
+        0,
+        0,
+        255
+      ]
+    }
+  ],
+  "tableDefinitions" : [
+  ]
+}
