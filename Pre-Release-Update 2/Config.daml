@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArcGIS defaultAssembly="ArcGISProSDKSamples.dll" defaultNamespace="ProSDKSamples" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS%20Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{f9ad6e8b-7505-4218-aabc-2389e1a9c3cd}" version="1.0" desktopVersion="1.0.1078">
+    <Name>ArcGISProSDKSamples</Name>
+    <Description>ArcGIS Pro SDK Samples description</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author>Esri</Author>
+    <Company>Esri</Company>
+    <Date>8/27/2014 1:53:48 PM, 2014</Date>
+  </AddInInfo>
+  <dependencies>
+    <!--<dependency name="ADCore.daml" />-->
+    <dependency name="ADMapping.daml" />
+    <dependency name="Editing.daml" />
+  </dependencies>
+  <categories>
+    <insertCategory id="ProSDKSamplesExampleCategory" />
+    <updateCategory refID="esri_editing_EditTools_POLYGON">
+      <insertComponent id="ProSDKSamples_CutTool">
+        <content guid="d5c81e74-56d2-4a2f-ac8e-f7926c02d5da" group="esri_editing_EditTools_POLYGON_Tools" />
+      </insertComponent>
+    </updateCategory>
+    <!--Add the project container here-->
+    <updateCategory refID="esri_core_projectContainers">
+      <!--NOTE : content type attribute must match type referenced in ProjectIntegration.cs in SampleProjectContainer constructor-->
+      <insertComponent id="_ProjectContainerProjectItem_SampleContainer" className="ProSDKSamples.ProjectItemProjectContainer.SampleProjectContainer">
+        <content type="SampleProjectItems" displayName="Sample Items" />
+      </insertComponent>
+    </updateCategory>
+    <!--Add the project item here-->
+    <updateCategory refID="esri_itemInfoType">
+      <!--NOTE : type id attribute must match typeID referenced in ProjectIntegration.cs in SampleProjectItem constructor-->
+      <insertComponent id="_ProjectContainerProjectItem_SampleProjectItem" className="ProSDKSamples.ProjectItemProjectContainer.SampleProjectItem">
+        <content viewModelClassName="ProSDKSamples.ProjectItemProjectContainer.SampleProjectItemViewModel,ProSDKSamples">
+          <supportedTypeIDs>
+            <type id="sampleItem" />
+          </supportedTypeIDs>
+        </content>
+      </insertComponent>
+    </updateCategory>
+  </categories>
+  <conditions>
+    <!-- our custom condition -->
+    <insertCondition id="example_state_condition" caption="Example state">
+      <!-- our condition is set true or false based on this underlying state -->
+      <state id="example_state" />
+    </insertCondition>
+  </conditions>
+  <!-- uncomment to add a key accelerator/short cut for the control -->
+  <accelerators>
+    <!--<insertAccelerator refID="Your_Control_Id_Here" flags="Ctrl" key="F1" />-->
+  </accelerators>
+  <modules>
+    <insertModule id="ProSDKSamples_Module1_id" className="ProSDKSampleModule" autoLoad="false" caption="Module1">
+      <!-- uncomment to have the control hosted on a separate tab-->
+      <tabs>
+        <!--<tab id="Module1_Tab1_Id" caption="New Tab">
+          <group refID="$groupid$"/>
+        </tab>-->
+      </tabs>
+      <tabGroups></tabGroups>
+      <toolbars></toolbars>
+      <groups>
+        <group id="ProSDKSamples_FixedZoom_id" caption="Fixed Zoom" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="ProSDKSamples_FixedZoomIn" size="large" />
+          <button refID="ProSDKSamples_FixedZoomOut" size="large" />
+        </group>
+        <group id="ProSDKSamples_CameraGroup" caption="Heading" appearsOnAddInTab="true">
+          <customControl refID="ProSDKSamples_HeadingControl" size="large" />
+        </group>
+        <group id="ProSDKSamples_HollywoodZoomGroup" caption="Spiral Zoom" appearsOnAddInTab="true">
+          <button refID="ProSDKSamples_HollywoodZoomIn" size="large" />
+          <button refID="ProSDKSamples_HollywoodZoomOut" size="large" />
+        </group>
+        <group id="ProSDKSamples_Geocode_id" caption="Geocode" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="ProSDKSamples_GeocodeButton" size="large" />
+        </group>
+        <group id="ProSDKSamples_GP_id" caption="Execute GP" appearsOnAddInTab="true">
+          <button refID="ProSDKSamples_ExecuteGP" size="large" />
+          <button refID="ProSDKSamples_CancelExecuteGP" size="large" />
+        </group>
+        <group id="ProSDKSamples_SubscribeEvents_Group1" caption="Subscribe Events" appearsOnAddInTab="true">
+          <checkBox refID="ProSDKSamples_SelectionChangedCheckbox" size="small" />
+        </group>
+        <group id="ProSDKSamples_DockPane_id" caption="Sample Dockpane" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="ProSDKSamples_ButtonZoomToButton" size="large" />
+          <button refID="ProSDKSamples_ButtonPanToButton" size="large" />
+          <button refID="ProSDKSamples_DockpaneButton" size="large" />
+        </group>
+        <group id="ProSDKSamples_FrameworkState_Group1" caption="State and Conditions" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="ProSDKSamples_ToggleAppStateBtn" size="large" />
+          <button refID="ProSDKSamples_RespondToAppStateBtn" size="large" />
+        </group>
+        <!--<group id="ProSDKSamples_ComponentCat_Group1" caption="Categories" appearsOnAddInTab="true">
+        <button refID="ProSDKSamples_CustomComponentCategory" size="large" />
+      </group>-->
+        <group id="ProSDKSamples_LayersPane_Group1" caption="Layers Pane" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="ProSDKSamples_LayersPaneButton" size="large" />
+        </group>
+        <group id="ProSDKSamples_PublishEvent_Group" caption="Publish Event" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="ProSDKSamples_PublishEventButton" size="large" />
+        </group>
+        <group id="ProjectItemProjectContainer_Group1" caption="Project Items" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="ProSDKSamples_OpenMap" size="large" />
+          <button refID="ProSDKSamples_CloseMap" size="large" />
+          <button refID="ProSDKSamples_AddContainerItem" size="large" />
+        </group>
+      </groups>
+      <controls>
+        <button id="ProSDKSamples_OpenMap" caption="Open Map" className="ProSDKSamples.ProjectItemProjectContainer.OpenMap" loadOnClick="true" smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png">
+          <tooltip heading="Tooltip Heading">
+            Tooltip text<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_CloseMap" caption="Delete Map" className="ProSDKSamples.ProjectItemProjectContainer.DeleteMap" loadOnClick="true" smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png">
+          <tooltip heading="Tooltip Heading">
+            Tooltip text<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_AddContainerItem" className="ProSDKSamples_Module1_id:AddContainerItem" caption="Add Project Item" smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png">
+          <tooltip heading="Add Project Item">
+            Tooltip<disabledText></disabledText></tooltip>
+        </button>
+        <!-- add your controls here -->
+        <button id="ProSDKSamples_FixedZoomIn" caption="FixedZoomIn " className="ProSDKSamples.FixedZoom.FixedZoomIn" loadOnClick="true" smallImage="Images\ZoomFixedZoomIn16.png" largeImage="Images\ZoomFixedZoomIn32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Tooltip Heading">Fixed Zoom In<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_FixedZoomOut" caption="FixedZoomOut " className="ProSDKSamples.FixedZoom.FixedZoomOut" loadOnClick="true" smallImage="Images\ZoomFixedZoomOut_B_16.png" largeImage="Images\ZoomFixedZoomOut_B_32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Tooltip Heading">Tooltip text<disabledText /></tooltip>
+        </button>
+        <customControl id="ProSDKSamples_HeadingControl" condition="esri_mapping_mapPane" caption="Camera Heading" className="ProSDKSamples.CameraHeading.HeadingViewModel" loadOnClick="false" smallImage="Images\GenericButtonBlue16.png">
+          <content className="ProSDKSamples.CameraHeading.HeadingControl" />
+        </customControl>
+        <button id="ProSDKSamples_HollywoodZoomIn" caption="Hollywood Zoom-In" className="ProSDKSamples.HollywoodZoom.HollywoodZoomIn" loadOnClick="true" smallImage="Images\ZoomInTool_B_16.png" largeImage="Images\ZoomInTool_B_32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Hollywood Zoom-In">
+            The spiral towards earth ☺<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_HollywoodZoomOut" caption="Hollywood Zoom-Out " className="ProSDKSamples.HollywoodZoom.HollywoodZoomOut" loadOnClick="true" smallImage="Images\ZoomOutTool_B_16.png" largeImage="Images\ZoomOutTool_B_32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Hollywood Zoom-Out">
+            The spiral away from earth ☺<disabledText /></tooltip>
+        </button>
+        <!-- Geocode Button -->
+        <button id="ProSDKSamples_GeocodeButton" caption="Geocode Sample" className="ProSDKSamples.Geocode.GeocodeButton" loadOnClick="true" smallImage="Images\GeocodeAddresses16.png" largeImage="Images\GeocodeAddresses32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Geocoding Sample">
+            Geocoding sample to show async services integration.<disabledText>Have a map pane active in order to use the tool.</disabledText></tooltip>
+        </button>
+        <button id="contextMenu_LayerViewerButton" caption="Layer Viewer" className="ProSDKSamples.InsertIntoContextMenu.LayerViewerButton" loadOnClick="true" smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png" condition="esri_mapping_singleLayerSelectedCondition">
+          <tooltip heading="View Layer Definition">
+            <disabledText />
+          </tooltip>
+        </button>
+        <button id="ProSDKSamples_ExecuteGP" caption="ExecuteGP " className="ProSDKSamples.GP.ExecuteGP" loadOnClick="true" smallImage="Images\GenericButtonGreen16.png" largeImage="Images\GenericButtonGreen32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Execute GP">Execute GP<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_CancelExecuteGP" caption="Cancel ExecuteGP " className="ProSDKSamples.GP.CancelExecuteGP" loadOnClick="true" smallImage="Images\GenericButtonRed16.png" largeImage="Images\GenericButtonRed32.png" condition="esri_mapping_mapPane" disableIfBusy="false">
+          <tooltip heading="Cancel GP">Cancel GP<disabledText /></tooltip>
+        </button>
+        <tool id="ProSDKSamples_CutTool" caption="Example Cut Tool" className="ProSDKSamples.EditingCutFeatures.CutFeaturesTool" loadOnClick="true" smallImage="Images\EditingSplitPolygonTool16.png" largeImage="Images\EditingSplitPolygonTool32.png" categoryRefID="esri_editing_CommandList">
+          <tooltip heading="Cut">
+            Cut features selected with the cut line.<disabledText /></tooltip>
+          <content L_group="Cut" gallery2d="true" placeAfter="esri_editing_PlanarizeLineFeatures" />
+        </tool>
+        <button id="ProSDKSamples_ButtonZoomToButton" caption="Zoom" className="ProSDKSamples.DockPaneDemo.ButtonZoomToButton" loadOnClick="true" smallImage="Images\ZoomGeneric16.png" largeImage="Images\ZoomGeneric_B_32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Zoom to">
+            Zoom to every item in the Bookmarks<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_ButtonPanToButton" caption="Pan" className="ProSDKSamples.DockPaneDemo.ButtonPanToButton" loadOnClick="true" smallImage="Images\PanTool16.png" largeImage="Images\PanTool32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Pan To">
+            Pan to every item in the Bookmarks<disabledText /></tooltip>
+        </button>
+        <checkBox id="ProSDKSamples_SelectionChangedCheckbox" caption="Trap Selection Changed" className="ProSDKSamples.SubscribeEvents.TrapSelectionChangedCheckbox" loadOnClick="false">
+          <tooltip heading="Trap Selection Changed">
+            <disabledText></disabledText>
+          </tooltip>
+        </checkBox>
+        <button id="ProSDKSamples_DockpaneButton" caption="Bookmarks pane" className="ProSDKSamples.DockPaneDemo.DockpaneButton" loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png">
+          <tooltip heading="Display Bookmarks">
+            Display all the bookmarks in the project.<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_DockPaneBurgerButton1" caption="Gallery view" className="ProSDKSamples.DockPaneDemo.DockpaneBurgerButton_button1" loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png">
+          <tooltip heading="Gallery view">
+            Gallery view<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_DockPaneBurgerButton2" caption="List View" className="ProSDKSamples.DockPaneDemo.DockpaneBurgerButton_button2" loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png">
+          <tooltip heading="List View">
+            List View<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_ToggleAppStateBtn" caption="Toggle State" className="ProSDKSamples.FrameworkState.ToggleStateButton" loadOnClick="true" smallImage="Images\GenericButtonBlue16.png" largeImage="Images\GenericButtonBlue32.png">
+          <tooltip heading="Toggle custom Add-in state">
+            <disabledText />
+          </tooltip>
+        </button>
+        <button id="ProSDKSamples_RespondToAppStateBtn" caption="Respond To State" className="ProSDKSamples.FrameworkState.RespondToStateButton" loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png" condition="example_state_condition">
+          <tooltip heading="Respond To State Button">
+            Listens for the condition named <b>example_state_condition</b><disabledText>
+              The <b>example_state_condition</b> is False
+            </disabledText></tooltip>
+        </button>
+        <!--<button id="ProSDKSamples_CustomComponentCategory" caption="Use Category" className="ProSDKSamples.CustomComponentCategory.ComponentCategoryButton" loadOnClick="true"
+                smallImage="Images\GenericButtonGreen16.png" largeImage="Images\GenericButtonGreen32.png">
+          <tooltip heading="Component Category">
+            Shows use of custom component category<disabledText>
+            </disabledText>
+          </tooltip>
+        </button>-->
+        <button id="ProSDKSamples_LayersPaneButton" caption="Show Pane" className="ProSDKSamples.LayersPane.LayersPaneShowButton" loadOnClick="true" smallImage="Images\GenericButtonRed16.png" largeImage="Images\GenericButtonRed32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Display Layers Pane">
+            Display Layers Pane<disabledText /></tooltip>
+        </button>
+        <button id="ProSDKSamples_PublishEventButton" caption="Publish Event" className="ProSDKSamples.SubscribeEvents.PublishEventButton" loadOnClick="true" smallImage="Images\GenericButtonBlack16.png" largeImage="Images\GenericButtonBlack32.png">
+          <tooltip heading="Example Button">Publishes a custom event</tooltip>
+        </button>
+      </controls>
+      <galleries></galleries>
+      <menus>
+        <menu id="DockpaneBurgerButton_Menu" caption="Options" contextMenu="true">
+          <button refID="ProSDKSamples_DockPaneBurgerButton1" />
+          <button refID="ProSDKSamples_DockPaneBurgerButton2" />
+        </menu>
+        <!--Context menu for Project Container-->
+        <menu id="SampleProjectContainerContextMenu" caption="Sample Container">
+          <!-- TODO : Add additional menu items here as necessary-->
+        </menu>
+        <!--Context emnu for Project Item-->
+        <menu id="SampleProjectItemContextMenu" caption="Sample Item">
+          <!-- TODO : Add additional menu items here as necessary-->
+        </menu>
+      </menus>
+      <splitButtons></splitButtons>
+      <palettes></palettes>
+      <panes>
+        <pane id="ProSDKSamples_LayersPane" caption="Layers Pane " className="ProSDKSamples.LayersPane.LayersPaneViewModel" smallImage="Images\GenericButtonGreen16.png" isClosable="true" defaultTab="esri_mapping_homeTab" defaultTool="esri_mapping_navigateTool">
+          <content className="ProSDKSamples.LayersPane.LayersPaneView" />
+        </pane>
+      </panes>
+      <dockPanes>
+        <dockPane id="ProSDKSamples_Dockpane_id" caption="Bookmarks " className="ProSDKSamples.DockPaneDemo.DockpaneViewModel" keytip="DockPane" initiallyVisible="true" dock="group" dockWith="esri_core_contentsDockPane">
+          <content className="ProSDKSamples.DockPaneDemo.DockpaneView" />
+        </dockPane>
+      </dockPanes>
+    </insertModule>
+    <updateModule refID="esri_mapping">
+      <menus>
+        <updateMenu refID="esri_mapping_layerContextMenu">
+          <insertButton refID="contextMenu_LayerViewerButton" separator="true" placeWith="esri_mapping_selectedLayerPropertiesButton" />
+        </updateMenu>
+      </menus>
+    </updateModule>
+  </modules>
+</ArcGIS>
