@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArcGIS defaultAssembly="TheCustomComponent.dll" defaultNamespace="TheCustomComponent" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS%20Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{070721c0-7282-4c26-b376-1e590e80c553}" version="1.0" desktopVersion="1.0.1078">
+    <Name>TheCustomComponent</Name>
+    <Description>TheCustomComponent description</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author></Author>
+    <Company>Acme</Company>
+    <Date>7/7/2014 1:53:48 PM, 2014</Date>
+  </AddInInfo>
+  <dependencies>
+    <!--<dependency name="ADCore.daml" />-->
+  </dependencies>
+  
+    <categories>
+
+      <updateCategory refID="UCSampleExampleCategory">
+        <insertComponent id="Acme_Corp_NetworkTraceExtender" className="AcmeCorpNetworkTracer">
+          <!-- this is the content you support for your
+             category. I provide that content here-->
+          <content name="Power Station NetworkTracer" description="Implements the x,y,z algorithm for network tracing" author="Acme Corp." version="11.3.2">
+            <param1 value="More info"/>
+            <param2 value="Etc.,etc."/>
+          </content>
+        </insertComponent>
+      </updateCategory>
+    </categories>
+ 
+  <modules>
+    <insertModule id="TheCustomComponent_Module1_id" className="Module1" autoLoad="true" caption="Module1">
+      <!-- uncomment to have the control hosted on a separate tab-->
+      <tabs>
+      </tabs>
+      <tabGroups></tabGroups>
+      <toolbars></toolbars>
+      <groups>        
+      </groups>
+      
+      <controls>
+        <!-- add your controls here -->
+
+      </controls>
+      <galleries></galleries>
+      
+    </insertModule>
+
+  </modules>
+</ArcGIS>
